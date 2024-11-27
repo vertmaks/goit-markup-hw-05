@@ -577,7 +577,6 @@ footer .subscribe-button:focus {
 
 .modal-backdrop.is-open .modal {
   transform: translate(-50%, -50%);
-  transition-delay: 200ms;
 }
 
 .modal-close-btn {
