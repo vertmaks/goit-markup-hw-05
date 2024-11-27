@@ -319,6 +319,8 @@ header .logo {
 .team-cards-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
 }
 
@@ -371,6 +373,7 @@ header .logo {
 .portfolio-cards-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 48px 24px;
 }
 
@@ -488,6 +491,7 @@ footer .user-email {
   font-weight: 500;
   letter-spacing: 0.04em;
   color: #fff;
+  outline: transparent;
 }
 
 footer .user-email::placeholder {
@@ -517,7 +521,7 @@ footer .subscribe-button:focus {
   background-color: #404bbf;
 }
 
-footer .icon {
+.footer .form .icon {
   margin-left: 16px;
 }
 /* #endregion */
@@ -534,8 +538,20 @@ footer .icon {
   height: 100%;
   background-color: rgba(46, 47, 66, 0.4);
 
-  pointer-events: auto;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: opacity, visibility;
+  transition-delay: 200ms;
+}
+
+.modal-backdrop.is-open {
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0ms;
 }
 
 .modal {
@@ -547,6 +563,17 @@ footer .icon {
   width: 408px;
   padding: 24px;
   padding-top: 72px;
+
+  scale: 0;
+
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: scale;
+  transition-delay: 0ms;
+}
+
+.modal-backdrop.is-open .modal {
+  scale: 1;
+  transition-delay: 200ms;
 }
 
 .modal-close-btn {
@@ -563,6 +590,7 @@ footer .icon {
   stroke: rgba(0, 0, 0, 0.1);
   background-color: #e7e9fc;
   cursor: pointer;
+  border: none;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -609,12 +637,17 @@ footer .icon {
   margin-top: 8px;
 }
 
-.modal-form-wrapper .icon {
+.modal-form-icon {
   position: absolute;
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
   fill: #2e2f42;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-input:focus + .modal-form-icon {
+  fill: #4d5ae5;
 }
 
 .modal-input {
@@ -623,20 +656,110 @@ footer .icon {
   border: 1px solid rgba(46, 47, 66, 0.4);
   border-radius: 4px;
   padding: 11px 38px;
+  outline: transparent;
+  color: #2e2f42;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-input:focus {
+  border-color: #4d5ae5;
 }
 
 .modal-comment {
   border: 1px solid rgba(46, 47, 66, 0.4);
   border-radius: 4px;
   width: 100%;
+  height: 120px;
   resize: none;
   margin-bottom: 16px;
   padding: 8px 16px;
+  outline: transparent;
+  color: #2e2f42;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-comment:focus {
+  border-color: #4d5ae5;
 }
 
 .modal-comment::placeholder {
   font-size: 12px;
   letter-spacing: 0.04em;
   color: rgba(46, 47, 66, 0.4);
+  outline: transparent;
+}
+
+.modal-form-agreement {
+  margin-bottom: 24px;
+}
+
+.agreement-text {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: #8e8f99;
+}
+
+.modal-form-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
+  margin-right: 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(46, 47, 66, 0.4);
+  cursor: pointer;
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: background-color, border;
+}
+
+.user-agreement:checked + .agreement-text .modal-form-checkbox {
+  background-color: #404bbf;
+  border: 1px solid #404bbf;
+}
+
+.modal-checkbox-icon {
+  fill: #f4f4fd;
+  opacity: 0;
+}
+
+.user-agreement:checked
+  + .agreement-text
+  .modal-form-checkbox
+  .modal-checkbox-icon {
+  opacity: 1;
+}
+
+.user-agreement:focus-visible + .agreement-text .modal-form-checkbox {
+  outline: 2px solid #404bbf;
+  outline-offset: 2px;
+}
+
+.privacy-link {
+  line-height: 133%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #4d5ae5;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form-btn {
+  border-radius: 4px;
+  border: none;
+  padding: 16px 32px;
+  margin: 0 auto;
+  width: 169px;
+  height: 56px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  background-color: #4d5ae5;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #fff;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-form-btn:hover,
+.modal-form-btn:focus {
+  background-color: #404bbf;
 }
 /* #endregion */
